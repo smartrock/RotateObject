@@ -14,6 +14,7 @@ namespace RotateObject
     {
         Graphics g; //declare a graphics object called g so we can draw on the Form
         Spaceship spaceship = new Spaceship(); //create an instance of the Spaceship Class called spaceship public Form1()
+        bool turnLeft, turnRight;
 
         public Form1()
         {
@@ -35,7 +36,27 @@ namespace RotateObject
 
         private void tmrSpaceship_Tick(object sender, EventArgs e)
         {
+            if (turnRight)
+            {
+                spaceship.rotationAngle += 5;
+            }
+            if (turnLeft)
+            {
+                spaceship.rotationAngle -= 5;
+            }
             Invalidate();
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Left) { turnLeft = false; }
+            if (e.KeyData == Keys.Right) { turnRight = false; }
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Left) { turnLeft = true; }
+            if (e.KeyData == Keys.Right) { turnRight = true; }
         }
     }
 }
